@@ -5,9 +5,7 @@
 </script>
 
 <template>
-  <el-row class="mb-4">
-    <el-button>Default</el-button>
-  </el-row>
+  <router-view></router-view>
 </template>
 
 <style scoped>
