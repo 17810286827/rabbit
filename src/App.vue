@@ -1,16 +1,12 @@
 <script setup>
   import { RouterLink, RouterView } from 'vue-router'
   import HelloWorld from './components/HelloWorld.vue'
+  import { getapi } from '@/apis/APItset.js'
 </script>
 
 <template>
   <el-row class="mb-4">
     <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Dange r</el-button>
   </el-row>
 </template>
 
@@ -73,3 +69,4 @@
     }
   }
 </style>
+./apis/APItset.js
