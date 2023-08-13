@@ -6,15 +6,21 @@
 
 <template>
   <!-- 一级路由出口 -->
-  <router-view></router-view>
+  <div>
+    <div class="test">test scss</div>
+    <router-view></router-view>
+  </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   header {
     line-height: 1.5;
     max-height: 100vh;
   }
 
+  .test {
+    color: $warnColor;
+  }
   .logo {
     display: block;
     margin: 0 auto 2rem;
