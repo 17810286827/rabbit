@@ -1,13 +1,10 @@
 <script setup>
   import { RouterLink, RouterView } from 'vue-router'
-  import HelloWorld from './components/HelloWorld.vue'
-  import { getapi } from '@/apis/APItset.js'
 </script>
 
 <template>
   <!-- 一级路由出口 -->
   <div>
-    <div class="test">test scss</div>
     <router-view></router-view>
   </div>
 </template>
@@ -18,9 +15,6 @@
     max-height: 100vh;
   }
 
-  .test {
-    color: $warnColor;
-  }
   .logo {
     display: block;
     margin: 0 auto 2rem;
