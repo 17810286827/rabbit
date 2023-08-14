@@ -15,9 +15,8 @@
         <li
           class="home"
           v-for="item in categoryStore.categoryList"
-          :key="item.id"
-        >
-          <RouterLink to="/">{{ item.name }}</RouterLink>
+          :key="item.id">
+          <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
         </li>
       </ul>
       <div class="search">
