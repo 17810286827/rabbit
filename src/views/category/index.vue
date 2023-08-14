@@ -3,9 +3,9 @@
   import { ref, onMounted } from 'vue'
   import { useRoute } from 'vue-router'
   import { getBannerAPI } from '@/apis/home.js'
+  import GoodsItem from '@/views/Home/components/goodsItem.vue'
 
   const route = useRoute()
-
   const topCategory = ref({})
   const getTopCategory = async () => {
     const res = await getTopCategoryAPI(route.params.id)
@@ -45,6 +45,32 @@
             <img :src="item.imgUrl" alt="" />
           </el-carousel-item>
         </el-carousel>
+      </div>
+      <!-- 分类列表 -->
+      <div class="sub-list">
+        <h3>全部分类</h3>
+        <ul>
+          <li v-for="i in topCategory.children" :key="i.id">
+            <RouterLink to="/">
+              <img :src="i.picture" />
+              <p>{{ i.name }}</p>
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="ref-goods"
+        v-for="item in topCategory.children"
+        :key="item.id">
+        <div class="head">
+          <h3>- {{ item.name }}-</h3>
+        </div>
+        <div class="body">
+          <GoodsItem
+            v-for="goods in item.goods"
+            :goods="goods"
+            :key="goods.id" />
+        </div>
       </div>
     </div>
   </div>
