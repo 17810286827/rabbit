@@ -1,31 +1,11 @@
 <script setup>
-  import { getTopCategoryAPI } from '@/apis/category.js'
-  import { ref, onMounted } from 'vue'
-  import { useRoute } from 'vue-router'
-  import { getBannerAPI } from '@/apis/home.js'
   import GoodsItem from '@/views/Home/components/goodsItem.vue'
 
-  const route = useRoute()
-  const topCategory = ref({})
-  const getTopCategory = async () => {
-    const res = await getTopCategoryAPI(route.params.id)
-    topCategory.value = res.result
-  }
+  import { useCategory } from './composables/useCategory.js'
+  import { useBannel } from './composables/useBannel.js'
 
-  onMounted(() => {
-    getTopCategory()
-  })
-
-  const bannerList = ref([])
-  const getBanner = async () => {
-    const { result: data } = await getBannerAPI({
-      distributionSite: '2',
-    })
-    bannerList.value = data
-  }
-  onMounted(() => {
-    getBanner()
-  })
+  const { topCategory } = useCategory()
+  const { bannerList } = useBannel()
 </script>
 
 <template>
@@ -61,7 +41,8 @@
       <div
         class="ref-goods"
         v-for="item in topCategory.children"
-        :key="item.id">
+        :key="item.id"
+      >
         <div class="head">
           <h3>- {{ item.name }}-</h3>
         </div>
@@ -69,7 +50,8 @@
           <GoodsItem
             v-for="goods in item.goods"
             :goods="goods"
-            :key="goods.id" />
+            :key="goods.id"
+          />
         </div>
       </div>
     </div>
