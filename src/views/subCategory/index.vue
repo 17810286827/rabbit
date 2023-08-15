@@ -25,7 +25,7 @@
     sortField: 'publishTime',
   })
   const getSubCategory = async () => {
-    const res = await getSubCategoryAPI(data)
+    const res = await getSubCategoryAPI(data.value)
     goodsList.value = res.result.items
   }
   onMounted(() => getSubCategory())
@@ -35,6 +35,16 @@
     console.log(data.value.sortField)
     data.value.page = 1
     getSubCategory()
+  }
+  // 下拉加载
+  const disabled = ref(false)
+  const load = async () => {
+    data.value.page++
+    const res = await getSubCategoryAPI(data.value)
+    goodsList.value = [...goodsList.value, ...res.result.items]
+    if (res.result.items.length == 0) {
+      disabled.value = true
+    }
   }
 </script>
 
@@ -56,13 +66,15 @@
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div
+        class="body"
+        v-infinite-scroll="load"
+        :infinite-scroll-disabled="disabled">
         <!-- 商品列表-->
         <goodsItem
           v-for="goods in goodsList"
           :key="goods.id"
-          :goods="goods"
-        ></goodsItem>
+          :goods="goods"></goodsItem>
       </div>
     </div>
   </div>
