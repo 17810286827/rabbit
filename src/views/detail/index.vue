@@ -1,6 +1,7 @@
 <script setup>
   import DetailsHot from './components/DetailsHot.vue'
   import { getDetailsAPI } from '@/apis/detail.js'
+  import goodsImg from '@/components/goodsImg.vue'
 
   import { ref, onMounted } from 'vue'
   import { useRoute } from 'vue-router'
@@ -40,7 +41,7 @@
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-
+              <goodsImg></goodsImg>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -128,8 +129,8 @@
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-              <DetailsHot></DetailsHot>
-              <DetailsHot></DetailsHot>
+              <DetailsHot :hotType="1"></DetailsHot>
+              <DetailsHot :hotType="2"></DetailsHot>
             </div>
           </div>
         </div>
