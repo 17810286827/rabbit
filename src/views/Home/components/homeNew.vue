@@ -17,8 +17,8 @@
     <homePannel title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
       <ul class="goods-list">
         <li v-for="item in newList" :key="item.id">
-          <RouterLink to="/">
-            <el-image :src="item.picture" alt="" lazy></el-image>
+          <RouterLink :to="`/detail/${item.id}`">
+            <el-image :src="item.picture" alt=""></el-image>
             <p class="name">{{ item.name }}</p>
             <p class="price">&yen;{{ item.price }}</p>
           </RouterLink>

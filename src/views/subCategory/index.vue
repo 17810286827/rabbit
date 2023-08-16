@@ -69,12 +69,14 @@
       <div
         class="body"
         v-infinite-scroll="load"
-        :infinite-scroll-disabled="disabled">
+        :infinite-scroll-disabled="disabled"
+      >
         <!-- 商品列表-->
         <goodsItem
           v-for="goods in goodsList"
           :key="goods.id"
-          :goods="goods"></goodsItem>
+          :goods="goods"
+        ></goodsItem>
       </div>
     </div>
   </div>
