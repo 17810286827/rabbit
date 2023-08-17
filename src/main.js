@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { componentPlugin } from '@/components/index'
 
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
 import { useIntersectionObserver } from '@vueuse/core'
 
 import App from './App.vue'
@@ -11,7 +13,10 @@ import '@/styles/common.scss'
 
 const app = createApp(App)
 
-app.use(createPinia())
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+
+app.use(pinia)
 app.use(router)
 
 app.mount('#app')
@@ -23,5 +28,5 @@ app.directive('img-lazy', {
     useIntersectionObserver(el, ([{ isIntersecting }]) => {
       console.log(isIntersecting)
     })
-  },
+  }
 })
