@@ -1,13 +1,14 @@
 <script setup>
   // 图片列表
-  import { ref } from 'vue'
-  const imageList = [
-    'https://yanxuan-item.nosdn.127.net/d917c92e663c5ed0bb577c7ded73e4ec.png',
-    'https://yanxuan-item.nosdn.127.net/e801b9572f0b0c02a52952b01adab967.jpg',
-    'https://yanxuan-item.nosdn.127.net/b52c447ad472d51adbdde1a83f550ac2.jpg',
-    'https://yanxuan-item.nosdn.127.net/f93243224dc37674dfca5874fe089c60.jpg',
-    'https://yanxuan-item.nosdn.127.net/f881cfe7de9a576aaeea6ee0d1d24823.jpg',
-  ]
+  import { ref, watch } from 'vue'
+
+  defineProps({
+    imageList: {
+      type: Array,
+      default: () => {},
+    },
+  })
+
   const imgIndex = ref(0)
   const getImgIndex = (i) => {
     imgIndex.value = i
@@ -17,6 +18,41 @@
   import { useMouseInElement } from '@vueuse/core'
   const target = ref(null)
   const { elementX, elementY, isOutside } = useMouseInElement(target)
+  const left = ref(0)
+  const top = ref(0)
+  const positionX = ref(0)
+  const positionY = ref(0)
+
+  watch([elementX, elementY, isOutside], () => {
+    // 移动范围
+    if (isOutside.value === true) return
+    if (elementX.value > 100 && elementX.value < 300) {
+      left.value = elementX.value - 100
+      positionX.value = -left.value * 2
+    }
+    if (elementY.value > 100 && elementY.value < 300) {
+      top.value = elementY.value - 100
+      positionY.value = -top.value * 2
+    }
+
+    // 固定边界
+    if (elementX.value < 100) {
+      left.value = 0
+      positionX.value = -left.value * 2
+    }
+    if (elementX.value > 300) {
+      left.value = 200
+      positionX.value = -left.value * 2
+    }
+    if (elementY.value < 100) {
+      top.value = 0
+      positionY.value = -top.value * 2
+    }
+    if (elementY.value > 300) {
+      top.value = 200
+      positionY.value = -top.value * 2
+    }
+  })
 </script>
 
 <template>
@@ -24,9 +60,13 @@
   <div class="goods-image">
     <!-- 左侧大图-->
     <div class="middle" ref="target">
-      <img :src="imageList[imgIndex]" alt="" />
+      <img :src="imageList?.[imgIndex]" alt="" />
       <!-- 蒙层小滑块 -->
-      <div class="layer" :style="{ left: `0px`, top: `0px` }"></div>
+      <div
+        class="layer"
+        :style="{ left: `${left}px`, top: `${top}px` }"
+        v-show="!isOutside"
+      ></div>
     </div>
     <!-- 小图列表 -->
     <ul class="small">
@@ -44,12 +84,12 @@
       class="large"
       :style="[
         {
-          backgroundImage: `url(${imageList[0]})`,
-          backgroundPositionX: `0px`,
-          backgroundPositionY: `0px`,
+          backgroundImage: `url(${imageList?.[imgIndex]})`,
+          backgroundPositionX: `${positionX}px`,
+          backgroundPositionY: `${positionY}px`,
         },
       ]"
-      v-show="false"
+      v-show="!isOutside"
     ></div>
   </div>
 </template>

@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { componentPlugin } from '@/components/index'
 
 import { useIntersectionObserver } from '@vueuse/core'
 
@@ -14,6 +15,7 @@ app.use(createPinia())
 app.use(router)
 
 app.mount('#app')
+app.use(componentPlugin)
 
 app.directive('img-lazy', {
   mounted(el, binding) {
