@@ -1,6 +1,14 @@
 <script setup>
   import { useUserStore } from '@/stores/userStore.js'
   const userUser = useUserStore()
+  import { useRouter } from 'vue-router'
+
+  const router = useRouter()
+
+  const confirmOut = () => {
+    userUser.clearUserInfo()
+    router.replace('/login')
+  }
 </script>
 
 <template>
@@ -9,12 +17,10 @@
       <ul>
         <template v-if="userUser.userInfo.token">
           <li
-            ><a href="javascript:;"
-              ><i class="iconfont icon-user"></i>{{ userUser.userInfo.account }}</a
-            ></li
+            ><a href="javascript:;"><i class="iconfont icon-user"></i>{{ userUser.userInfo.account }}</a></li
           >
           <li>
-            <el-popconfirm title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消">
+            <el-popconfirm @confirm="confirmOut" title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消">
               <template #reference>
                 <a href="javascript:;">退出登录</a>
               </template>

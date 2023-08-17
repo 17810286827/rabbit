@@ -22,7 +22,7 @@
     categoryId: route.params.id,
     page: 1,
     pageSize: 20,
-    sortField: 'publishTime',
+    sortField: 'publishTime'
   })
   const getSubCategory = async () => {
     const res = await getSubCategoryAPI(data.value)
@@ -66,17 +66,9 @@
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div
-        class="body"
-        v-infinite-scroll="load"
-        :infinite-scroll-disabled="disabled"
-      >
+      <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
         <!-- 商品列表-->
-        <goodsItem
-          v-for="goods in goodsList"
-          :key="goods.id"
-          :goods="goods"
-        ></goodsItem>
+        <goodsItem v-for="goods in goodsList" :key="goods.id" :goods="goods"></goodsItem>
       </div>
     </div>
   </div>
