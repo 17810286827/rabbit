@@ -2,6 +2,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import { useUserStore } from '@/stores/userStore.js'
+import router from '@/router'
 
 // 创建axios实例
 const http = axios.create({
@@ -26,10 +27,15 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   (res) => res.data,
   (e) => {
+    const useUserInfo = useUserStore()
     ElMessage({
       type: 'warning',
       message: e.response.data.message
     })
+    if (e.response.status === 401) {
+      useUserInfo.clearUserInfo()
+      router.replace('/login')
+    }
     return Promise.reject(e)
   }
 )
