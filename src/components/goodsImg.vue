@@ -5,8 +5,8 @@
   defineProps({
     imageList: {
       type: Array,
-      default: () => {},
-    },
+      default: () => {}
+    }
   })
 
   const imgIndex = ref(0)
@@ -56,26 +56,16 @@
 </script>
 
 <template>
-  {{ elementX }},{{ elementY }},{{ isOutside }}
   <div class="goods-image">
     <!-- 左侧大图-->
     <div class="middle" ref="target">
       <img :src="imageList?.[imgIndex]" alt="" />
       <!-- 蒙层小滑块 -->
-      <div
-        class="layer"
-        :style="{ left: `${left}px`, top: `${top}px` }"
-        v-show="!isOutside"
-      ></div>
+      <div class="layer" :style="{ left: `${left}px`, top: `${top}px` }" v-show="!isOutside"></div>
     </div>
     <!-- 小图列表 -->
     <ul class="small">
-      <li
-        v-for="(img, i) in imageList"
-        :key="i"
-        @mouseenter="getImgIndex(i)"
-        :class="{ active: i === imgIndex }"
-      >
+      <li v-for="(img, i) in imageList" :key="i" @mouseenter="getImgIndex(i)" :class="{ active: i === imgIndex }">
         <img :src="img" alt="" />
       </li>
     </ul>
@@ -86,11 +76,10 @@
         {
           backgroundImage: `url(${imageList?.[imgIndex]})`,
           backgroundPositionX: `${positionX}px`,
-          backgroundPositionY: `${positionY}px`,
-        },
+          backgroundPositionY: `${positionY}px`
+        }
       ]"
-      v-show="!isOutside"
-    ></div>
+      v-show="!isOutside"></div>
   </div>
 </template>
 
