@@ -20,7 +20,6 @@
   let skuItem = {}
   const changed = (sku) => {
     skuItem = sku
-    console.log(skuItem)
   }
   onMounted(() => {
     getDetails()
@@ -35,7 +34,6 @@
 
   // 添加到购物车
   const addCart = () => {
-    console.log(skuItem)
     if (skuItem.skuId) {
       ElMessage.success('添加成功')
       cartStore.addCart({
@@ -43,7 +41,7 @@
         name: goods.value.name,
         picture: goods.value.mainPictures[0],
         price: goods.value.price,
-        count: goodsNum,
+        count: goodsNum.value,
         skuId: skuItem.skuId,
         attrsText: skuItem.specsText,
         select: true
