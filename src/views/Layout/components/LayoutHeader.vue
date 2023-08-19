@@ -1,6 +1,7 @@
 <script setup>
   import { ref, onMounted } from 'vue'
   import { useCategoryStore } from '@/stores/category.js'
+  import Cart from './cart.vue'
 
   const categoryStore = useCategoryStore()
 </script>
@@ -21,6 +22,7 @@
         <input type="text" placeholder="搜一搜" />
       </div>
       <!-- 头部购物车 -->
+      <Cart></Cart>
     </div>
   </header>
 </template>
