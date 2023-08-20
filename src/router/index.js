@@ -8,6 +8,7 @@ import Detail from '@/views/detail/index.vue'
 import CartList from '@/views/cartList/index.vue'
 import CheckOut from '@/views/checkout/index.vue'
 import Pay from '@/views/pay/index.vue'
+import PayCallback from '@/views/pay/payCallback.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,6 +44,10 @@ const router = createRouter({
         {
           path: 'pay',
           component: Pay
+        },
+        {
+          path: 'paycallback',
+          component: PayCallback
         }
       ]
     },

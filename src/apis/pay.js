@@ -7,3 +7,9 @@ export function submitOrderAPI(data) {
     data
   })
 }
+
+export function getOrderAPI(id) {
+  return http({
+    url: `/member/order/${id}`
+  })
+}
